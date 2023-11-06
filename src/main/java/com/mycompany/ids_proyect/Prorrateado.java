@@ -217,7 +217,6 @@ public class Prorrateado extends javax.swing.JFrame {
             }
             gestionador.GuardarProrrateadoPV_BAC(Table1, pv_total, numero_hitos, bac);
             metodo_ejecutado=true;
-            JOptionPane.showMessageDialog(null, "Todo bien ");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

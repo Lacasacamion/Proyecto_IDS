@@ -14,11 +14,11 @@ public class Hito {
         this.pv_a= pv_a;
         this.ev_a=ev_a;
         this.ac_a= ac_a;
-        this.cv=ev_a-ac_a;
-        this.sv=ev_a - pv_a;
-        this.cpi=ev_a/ac_a;
-        this.spi=ev_a/pv_a;
-        this.tcpi=(bac-ev_a)/(bac-ac_a);
+        this.cv=cv;
+        this.sv=sv;
+        this.cpi=cpi;
+        this.spi=spi;
+        this.tcpi=tcpi;
         this.eac=eac;
         this.etc=etc;
         this.vac=vac;

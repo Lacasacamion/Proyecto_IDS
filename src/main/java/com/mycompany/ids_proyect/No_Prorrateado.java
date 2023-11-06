@@ -12,6 +12,7 @@ public class No_Prorrateado extends javax.swing.JFrame {
     private int numero_hitos;
     private Gestionador gestionador;
     private boolean metodo_ejecutado= false;
+    private int j=0; //variable para habilitar al segundo boton
     
     //Creando tabla y trayendo valores de la interfaz amterior
     public No_Prorrateado(int numero_hitos) {
@@ -203,7 +204,6 @@ public class No_Prorrateado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:;
         int pv=0;
-       // int j=0;
         if(!metodo_ejecutado){
             //validando entrada de pv
             if(!validarPv(T3.getText().trim())){
@@ -214,14 +214,16 @@ public class No_Prorrateado extends javax.swing.JFrame {
             else{
                 pv=Integer.parseInt(T3.getText());
                 T3.setText("");
-                //j++;
+                j++;
             }
             gestionador.GuardarNoProrrateadoPV_BAC(Table1, pv, numero_hitos);
-            /*if(j>=numero_hitos){
+            if(j>=numero_hitos){
                 metodo_ejecutado=true;
-            }*/
+            }
         }
-        //metodo_ejecutado=true;
+        else{
+            JOptionPane.showMessageDialog(null, "No se admiten mas valores");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void T4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T4ActionPerformed
@@ -267,7 +269,7 @@ public class No_Prorrateado extends javax.swing.JFrame {
                 ac=Integer.parseInt(T5.getText());
                 T5.setText("");
             }
-            gestionador.GuardarNoProrrateadoEV_AC(Table1, numero_hitos, ev, ac);
+            gestionador.GuardarNoProrrateadoEV_AC(Table1, h_evaluar, ev, ac);
 
         }
 
