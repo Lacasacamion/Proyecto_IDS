@@ -10,9 +10,12 @@ public class No_Prorrateado extends javax.swing.JFrame {
     Vector columnas = new Vector();
     DefaultTableModel mdl_table;
     private int numero_hitos;
+    private int h_evaluar;
     private Gestionador gestionador;
     private boolean metodo_ejecutado= false;
     private int j=0; //variable para habilitar al segundo boton
+    private boolean tipo_variacion=false; //boolean para mostrar tabla final
+    private int k=0; //contador para activar los botones de variacion
     
     //Creando tabla y trayendo valores de la interfaz amterior
     public No_Prorrateado(int numero_hitos) {
@@ -47,6 +50,8 @@ public class No_Prorrateado extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         L7 = new javax.swing.JLabel();
         T6 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +114,20 @@ public class No_Prorrateado extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Variacion Tipica");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Variacion Atipica");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,14 +143,20 @@ public class No_Prorrateado extends javax.swing.JFrame {
                         .addGap(172, 172, 172)
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(L7)
-                                .addGap(18, 18, 18)
-                                .addComponent(T6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton3)
+                                .addGap(85, 85, 85)
+                                .addComponent(jButton4)
+                                .addGap(17, 17, 17))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(L7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(T6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -176,7 +201,11 @@ public class No_Prorrateado extends javax.swing.JFrame {
                     .addComponent(L6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,7 +267,6 @@ public class No_Prorrateado extends javax.swing.JFrame {
         // TODO add your handling code here:
         int ev;
         int ac;
-        int h_evaluar;
         if(!metodo_ejecutado){
             JOptionPane.showMessageDialog(null, "Ingrese el pv primero");
         }
@@ -269,8 +297,11 @@ public class No_Prorrateado extends javax.swing.JFrame {
                 ac=Integer.parseInt(T5.getText());
                 T5.setText("");
             }
-            gestionador.GuardarNoProrrateadoEV_AC(Table1, h_evaluar, ev, ac);
-
+            gestionador.GuardarNoProrrateadoEV_AC(Table1,numero_hitos, h_evaluar, ev, ac);
+            k++;
+            if(k>=h_evaluar){
+                tipo_variacion=true;
+            }
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -278,6 +309,32 @@ public class No_Prorrateado extends javax.swing.JFrame {
     private void T6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_T6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(!tipo_variacion){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
+        }
+        else{
+            gestionador.VariacionAtipica(h_evaluar, numero_hitos);
+            List<Hito> lista_de_hitos = gestionador.getHitos();
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            tabla_final.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(!tipo_variacion){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
+        }
+        else{
+            gestionador.VariacionTipica(h_evaluar, numero_hitos);
+            List<Hito> lista_de_hitos = gestionador.getHitos();
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            tabla_final.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public static boolean validarPv(String pv){
         try{
@@ -335,6 +392,8 @@ public class No_Prorrateado extends javax.swing.JFrame {
     private javax.swing.JTable Table1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

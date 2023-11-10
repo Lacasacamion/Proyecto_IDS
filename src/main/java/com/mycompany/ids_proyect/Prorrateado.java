@@ -11,8 +11,11 @@ public class Prorrateado extends javax.swing.JFrame {
     DefaultTableModel mdl_table;
     private int numero_hitos;
     private int bac;
+    private int h_evaluar;
     private Gestionador gestionador;
-    private boolean metodo_ejecutado= false;
+    private boolean metodo_ejecutado= false; //boolean para activar la entrada de pv´s y ac´s
+    private boolean tipo_variacion=false; //boolean para mostrar tabla final
+    private int j=0; //contador para activar los botones de variacion
     
     //Creando la tabla y trayendo los valores obtenidos en la interfaz anterior
     public Prorrateado(int numero_hitos, int bac) {
@@ -53,6 +56,8 @@ public class Prorrateado extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         L7 = new javax.swing.JLabel();
         T6 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,6 +120,20 @@ public class Prorrateado extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Variacion Tipica");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Variacion Atipica");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,6 +169,12 @@ public class Prorrateado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(T6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(85, 85, 85)
+                .addComponent(jButton4)
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +201,11 @@ public class Prorrateado extends javax.swing.JFrame {
                     .addComponent(L6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,7 +261,6 @@ public class Prorrateado extends javax.swing.JFrame {
         // TODO add your handling code here:
         int ev;
         int ac;
-        int h_evaluar;
         if(!metodo_ejecutado){
             JOptionPane.showMessageDialog(null, "Ingrese el pv primero");           
         }
@@ -263,8 +291,11 @@ public class Prorrateado extends javax.swing.JFrame {
                 ac=Integer.parseInt(T5.getText());
                 T5.setText("");              
             }
-            gestionador.GuardarProrrateadoEV_AC(Table1, h_evaluar, ev, ac);
-            
+            gestionador.GuardarProrrateadoEV_AC(Table1, h_evaluar, numero_hitos, ev, ac);
+            j++;
+            if(j>=h_evaluar){
+                tipo_variacion=true;
+            }
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -272,6 +303,33 @@ public class Prorrateado extends javax.swing.JFrame {
     private void T6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_T6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_T6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(!tipo_variacion){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
+        }
+        else{
+            gestionador.VariacionTipica(h_evaluar, numero_hitos);
+            List<Hito> lista_de_hitos = gestionador.getHitos();
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            tabla_final.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(!tipo_variacion){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
+        }
+        else{
+            gestionador.VariacionAtipica(h_evaluar,numero_hitos);
+            List<Hito> lista_de_hitos = gestionador.getHitos();
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            tabla_final.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static boolean validarPv(String pv){
         try{
@@ -330,6 +388,8 @@ public class Prorrateado extends javax.swing.JFrame {
     private javax.swing.JTable Table1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
