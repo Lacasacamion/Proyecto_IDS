@@ -15,14 +15,11 @@ public class Gestionador {
     
     public void GuardarNoProrrateadoPV_BAC(JTable table,int pv, int numero_hitos){
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-        // Limpiar la tabla si ya contiene datos
-        //tableModel.setRowCount(0
-        
         if(i < numero_hitos){
             int p=i+1;
             pv_a = pv_a + pv;
             //Crear un nuevo objeto Hito y asignar valores
-            //Se asigna 1 a ac_a para evitar division entre 0
+            //Se asigna 0 a los atributos que no se modifican en este metodo.
             Hito hito= new Hito(p, pv, 0,0,0,pv_a,0,0,0,0,0,0,0,0,0,0);
             hitos.add(hito);//Agregar el hito a la lista
             
@@ -107,7 +104,7 @@ public class Gestionador {
         pv_a = pv_por_hito;
 
         for (int j = 1; j <= numero_hitos; j++) {
-            //Crear un nuevo objeto Hito y asignar valores con 1 para evitar divisiones entre 0
+            //Crear un nuevo objeto Hito y asignar valores 
             Hito hito= new Hito(j, pv_por_hito, bac, 0,0,pv_a,0,0,0,0,0,0,0,0,0,0);
             hitos.add(hito);//Agregar el hito a la lista
             pv_a = pv_por_hito*j;
@@ -130,7 +127,7 @@ public class Gestionador {
             Hito hito= hitos.get(i);//Obtener el hito en el orden que se crearon
             bac= hito.getBac();
             pv_a_hito= hito.getPv_a();
-            
+            sv= ev_a - pv_a_hito;
             spi= (double)ev_a/ pv_a_hito;
             tcpi=(double)(bac-ev_a)/(bac-ac_a);
             // Actualiza el hito con valores de ev, ac y ac_a
@@ -180,35 +177,6 @@ public class Gestionador {
         }
     }
 
-    //pendiente si se usara este metodo
-    public DefaultTableModel crearModeloTabla() {
-        Vector<String> columnas = new Vector<>();
-        columnas.addElement("Posición");
-        columnas.addElement("PV");
-        columnas.addElement("BAC");
-        columnas.addElement("EV");
-        columnas.addElement("AC");
-        columnas.addElement("PV acumulado");
-        columnas.addElement("AC acumulado");
-
-        DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0);
-
-        for (Hito hito : hitos) {
-            Vector<Object> rowData = new Vector<>();
-            rowData.addElement(hito.getPosicion());
-            rowData.addElement(hito.getPv());
-            rowData.addElement(hito.getBac());
-            rowData.addElement(hito.getEv());
-            rowData.addElement(hito.getAc());
-            rowData.addElement(hito.getPv_a());
-            rowData.addElement(hito.getAc_a());
-            // Agrega más datos según tus atributos de Hito
-            modeloTabla.addRow(rowData);
-        }
-
-        return modeloTabla;
-    }
-    
     public void VariacionAtipica(int h_evaluar, int numero_hitos){
         double etc, eac, vac;
         for(int g=0; g<h_evaluar;g++){

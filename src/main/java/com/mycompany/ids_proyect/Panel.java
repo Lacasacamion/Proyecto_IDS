@@ -70,10 +70,10 @@ public class Panel extends javax.swing.JFrame {
             }
         });
         Background.add(B1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
-        Background.add(L2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 190, 20));
-        Background.add(L3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 190, 20));
-        Background.add(L6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 190, 20));
-        Background.add(L7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 240, 20));
+        Background.add(L2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 190, 20));
+        Background.add(L3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 190, 20));
+        Background.add(L6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 190, 20));
+        Background.add(L7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 240, 20));
 
         B2.setText("Prorrateado");
         B2.addActionListener(new java.awt.event.ActionListener() {
@@ -95,9 +95,7 @@ public class Panel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
