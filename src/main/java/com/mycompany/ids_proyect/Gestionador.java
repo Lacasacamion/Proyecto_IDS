@@ -13,87 +13,6 @@ public class Gestionador {
     double ev_a=0;
     private ArrayList<Hito> hitos = new ArrayList<>();
     
-    private String interpretarCV(double cv) {
-        if(cv>0){
-            return "Eficiente";
-        }
-        else{
-            if(cv < 0){
-                return "Ineficiente";
-            }
-            else{
-                return "Eficaz";
-            }
-        }
-    }
-    
-    private String interpretarSV(double sv) {
-        if(sv>0){
-            return "Acelerado";
-        }
-        else{
-            if(sv < 0){
-                return "Lento";
-            }
-            else{
-                return "Constante";
-            }
-        }
-    }
-    
-    private String interpretarCPI(double cpi) {
-        if(cpi>1){
-            return "Se está gastando menos de lo que se planeó";
-        }
-        else{
-            if(cpi<1){
-                return "Se está gastando más de lo que se planeó";
-            }
-            else{
-                return "Se está gastando exactamente lo que se planéo";
-            }
-        }
-    }
-    
-    private String interpretarSPI(double spi) {
-        return ("Se esta avanzando a un "+spi+"% de lo esperado");
-    }
-    
-    private String interpretarTCPI(double tcpi) {
-        if(tcpi>1){
-            return "Se debe mejorar la eficiencia para no exceder el presupuesto inicial";
-        }
-        else{
-            if(tcpi < 1){
-                return "Se puede gastar más sin generar un exceso en el costo total del proyecto";
-            }
-            else{
-                return "Se debe gastar exactamente lo planificado para el proyecto";
-            }
-        }
-    }
-    
-    private String interpretarETC(double etc) {
-        return ("El proyecto costará "+etc+" de más");
-    }
-    
-    private String interpretarEAC(double eac) {
-        return ("El proyecto costara "+ eac+" al finalizar");
-    }
-    
-    private String interpretarVAC(double vac) {
-        if(vac>0){
-            return "Se espera que el proyecto cueste menos de lo presupuestado";
-        }
-        else{
-            if(vac < 0){
-                return "Se espera que el proyecto cueste más de lo que se presupuesto";
-            }
-            else{
-                return "Se espera  que el proyecto cueste lo planificado para el proyecto";
-            }
-        }
-    }
     public Gestionador(){
         
     }
@@ -355,6 +274,88 @@ public class Gestionador {
         rowData = new Object[]{"VAC", "BAC - EAC", vac, interpretarVAC(vac)};
         tableModel.addRow(rowData);
 
+    }
+    
+    private String interpretarCV(double cv) {
+        if(cv>0){
+            return "Eficiente";
+        }
+        else{
+            if(cv < 0){
+                return "Ineficiente";
+            }
+            else{
+                return "Eficaz";
+            }
+        }
+    }
+    
+    private String interpretarSV(double sv) {
+        if(sv>0){
+            return "Acelerado";
+        }
+        else{
+            if(sv < 0){
+                return "Lento";
+            }
+            else{
+                return "Constante";
+            }
+        }
+    }
+    
+    private String interpretarCPI(double cpi) {
+        if(cpi>1){
+            return "Se está gastando menos de lo que se planeó";
+        }
+        else{
+            if(cpi<1){
+                return "Se está gastando más de lo que se planeó";
+            }
+            else{
+                return "Se está gastando exactamente lo que se planéo";
+            }
+        }
+    }
+    
+    private String interpretarSPI(double spi) {
+        return ("Se esta avanzando a un "+spi+"% de lo esperado");
+    }
+    
+    private String interpretarTCPI(double tcpi) {
+        if(tcpi>1){
+            return "Se debe mejorar la eficiencia para no exceder el presupuesto inicial";
+        }
+        else{
+            if(tcpi < 1){
+                return "Se puede gastar más sin generar un exceso en el costo total del proyecto";
+            }
+            else{
+                return "Se debe gastar exactamente lo planificado para el proyecto";
+            }
+        }
+    }
+    
+    private String interpretarETC(double etc) {
+        return ("El proyecto costará "+etc+" de más");
+    }
+    
+    private String interpretarEAC(double eac) {
+        return ("El proyecto costara "+ eac+" al finalizar");
+    }
+    
+    private String interpretarVAC(double vac) {
+        if(vac>0){
+            return "Se espera que el proyecto cueste menos de lo presupuestado";
+        }
+        else{
+            if(vac < 0){
+                return "Se espera que el proyecto cueste más de lo que se presupuesto";
+            }
+            else{
+                return "Se espera  que el proyecto cueste lo planificado para el proyecto";
+            }
+        }
     }
     
     public ArrayList<Hito> getHitos() {
