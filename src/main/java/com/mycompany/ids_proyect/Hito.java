@@ -1,10 +1,10 @@
 package com.mycompany.ids_proyect;
 public class Hito {
     int posicion;
-    int pv, bac, ev,ac, pv_a, ev_a, ac_a, cv, sv;
+    double pv, bac, ev,ac, pv_a, ev_a, ac_a, cv, sv;
     double cpi, spi, tcpi,eac,etc, vac; 
 
-    public Hito(int posicion, int pv, int bac, int ev, int ac, int pv_a, int ev_a, int ac_a, int cv, int sv, 
+    public Hito(int posicion, double pv, double bac, double ev, double ac, double pv_a, double ev_a, double ac_a, double cv, double sv, 
                 double cpi, double spi, double tcpi, double eac, double etc, double vac) {
         this.posicion = posicion;
         this.pv = pv;
@@ -28,11 +28,11 @@ public class Hito {
         return posicion;
     }
 
-    public int getEv_a() {
+    public double getEv_a() {
         return ev_a;
     }
 
-    public void setEv_a(int ev_a) {
+    public void setEv_a(double ev_a) {
         this.ev_a = ev_a;
     }
 
@@ -40,67 +40,67 @@ public class Hito {
         this.posicion = posicion;
     }
 
-    public int getPv() {
+    public double getPv() {
         return pv;
     }
 
-    public void setPv(int pv) {
+    public void setPv(double pv) {
         this.pv = pv;
     }
 
-    public int getBac() {
+    public double getBac() {
         return bac;
     }
 
-    public void setBac(int bac) {
+    public void setBac(double bac) {
         this.bac = bac;
     }
 
-    public int getEv() {
+    public double getEv() {
         return ev;
     }
 
-    public void setEv(int ev) {
+    public void setEv(double ev) {
         this.ev = ev;
     }
 
-    public int getAc() {
+    public double getAc() {
         return ac;
     }
 
-    public void setAc(int ac) {
+    public void setAc(double ac) {
         this.ac = ac;
     }
 
-    public int getPv_a() {
+    public double getPv_a() {
         return pv_a;
     }
 
-    public void setPv_a(int pv_a) {
+    public void setPv_a(double pv_a) {
         this.pv_a = pv_a;
     }
 
-    public int getAc_a() {
+    public double getAc_a() {
         return ac_a;
     }
 
-    public void setAc_a(int ac_a) {
+    public void setAc_a(double ac_a) {
         this.ac_a = ac_a;
     }
 
-    public int getCv() {
+    public double getCv() {
         return cv;
     }
 
-    public void setCv(int cv) {
+    public void setCv(double cv) {
         this.cv = cv;
     }
 
-    public int getSv() {
+    public double getSv() {
         return sv;
     }
 
-    public void setSv(int sv) {
+    public void setSv(double sv) {
         this.sv = sv;
     }
 

@@ -10,7 +10,7 @@ public class Prorrateado extends javax.swing.JFrame {
     Vector columnas = new Vector();
     DefaultTableModel mdl_table;
     private int numero_hitos;
-    private int bac;
+    private double bac;
     private int h_evaluar;
     private Gestionador gestionador;
     private boolean metodo_ejecutado= false; //boolean para activar la entrada de pv´s y ac´s
@@ -18,7 +18,7 @@ public class Prorrateado extends javax.swing.JFrame {
     private int j=0; //contador para activar los botones de variacion
     
     //Creando la tabla y trayendo los valores obtenidos en la interfaz anterior
-    public Prorrateado(int numero_hitos, int bac) {
+    public Prorrateado(int numero_hitos, double bac) {
         initComponents();
         this.numero_hitos=numero_hitos;
         this.bac=bac;
@@ -152,27 +152,29 @@ public class Prorrateado extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(L5)
-                            .addComponent(L6))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(166, 166, 166)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(L5)
+                                    .addComponent(L6)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(L7)))
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(T4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(T5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(L7)
-                        .addGap(18, 18, 18)
-                        .addComponent(T6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(T5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(T6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(186, 186, 186))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(85, 85, 85)
+                .addGap(73, 73, 73)
                 .addComponent(jButton4)
                 .addGap(66, 66, 66))
         );
@@ -232,7 +234,7 @@ public class Prorrateado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int pv_total;
+        double pv_total;
         if(!metodo_ejecutado){
             //validando entrada de pv
             if(!validarPv(T3.getText().trim())){
@@ -241,10 +243,10 @@ public class Prorrateado extends javax.swing.JFrame {
                 return;//Salir del metodo si no se valida
             }
             else{
-                pv_total=Integer.parseInt(T3.getText());
+                pv_total=Double.parseDouble(T3.getText());
                 
             }
-            gestionador.GuardarProrrateadoPV_BAC(Table1, pv_total, numero_hitos, bac);
+            gestionador.guardarProrrateadoPV_BAC(Table1, pv_total, numero_hitos, bac);
             metodo_ejecutado=true;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -259,13 +261,13 @@ public class Prorrateado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int ev;
-        int ac;
+        double ev;
+        double ac;
         if(!metodo_ejecutado){
             JOptionPane.showMessageDialog(null, "Ingrese el pv primero");           
         }
         else{
-            if(!gestionador.ValidarHitosEvaluar(T6.getText().trim(), numero_hitos)){
+            if(!gestionador.validarHitosEvaluar(T6.getText().trim(), numero_hitos)){
                 JOptionPane.showMessageDialog(null, "El numero de hitos a evaluar no es valido.");
                 T6.setText("");
                 return;
@@ -279,7 +281,7 @@ public class Prorrateado extends javax.swing.JFrame {
                 return;
             }
             else{
-                ev=Integer.parseInt(T4.getText());
+                ev=Double.parseDouble(T4.getText());
                 T4.setText("");
             }
             if(!validarPv(T5.getText().trim())){
@@ -288,10 +290,10 @@ public class Prorrateado extends javax.swing.JFrame {
                 return;
             }
             else{
-                ac=Integer.parseInt(T5.getText());
+                ac=Double.parseDouble(T5.getText());
                 T5.setText("");              
             }
-            gestionador.GuardarProrrateadoEV_AC(Table1, h_evaluar, numero_hitos, ev, ac);
+            gestionador.guardarProrrateadoEV_AC(Table1, h_evaluar, numero_hitos, ev, ac);
             j++;
             if(j>=h_evaluar){
                 tipo_variacion=true;
@@ -310,9 +312,9 @@ public class Prorrateado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
         }
         else{
-            gestionador.VariacionTipica(h_evaluar, numero_hitos);
+            gestionador.variacionTipica(h_evaluar, numero_hitos);
             List<Hito> lista_de_hitos = gestionador.getHitos();
-            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos,h_evaluar);            
             tabla_final.setVisible(true);
         }
         
@@ -324,16 +326,16 @@ public class Prorrateado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
         }
         else{
-            gestionador.VariacionAtipica(h_evaluar,numero_hitos);
+            gestionador.variacionAtipica(h_evaluar,numero_hitos);
             List<Hito> lista_de_hitos = gestionador.getHitos();
-            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos,h_evaluar);            
             tabla_final.setVisible(true);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public static boolean validarPv(String pv){
         try{
-            int numero = Integer.parseInt(pv);
+            double numero = Double.parseDouble(pv);
             return numero > 0;
         }catch (NumberFormatException e){
             return false; // No se pudo convertir a un número entero válido

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Panel extends javax.swing.JFrame {
     private int numero_hitos;
-    private int bac;
+    private double bac;
     public Panel() {
         initComponents();
     }
@@ -71,7 +71,7 @@ public class Panel extends javax.swing.JFrame {
         });
         Background.add(B1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
         Background.add(L2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 190, 20));
-        Background.add(L3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 190, 20));
+        Background.add(L3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 270, 20));
         Background.add(L6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 190, 20));
         Background.add(L7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 240, 20));
 
@@ -112,7 +112,7 @@ public class Panel extends javax.swing.JFrame {
     private void B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B1ActionPerformed
         // TODO add your handling code here:
          String nombre = T1.getText();
-         int bac = 0;
+         double bac = 0;
          int numero_hitos = 0;
         //Validar entrada del nombre del proyecto
         if(nombre == null || nombre.isEmpty()){
@@ -128,7 +128,7 @@ public class Panel extends javax.swing.JFrame {
             return;//Salir del metodo si no se valida
         }
         else{
-            bac=Integer.parseInt(T3.getText());
+            bac=Double.parseDouble(T3.getText());
         }
         //Validar entrada de hitos
         if(!validarhito(T2.getText().trim())){
@@ -154,7 +154,7 @@ public class Panel extends javax.swing.JFrame {
     }
     public static boolean validarBAC(String bac){
         try{
-            int numero = Integer.parseInt(bac);
+            double numero = Double.parseDouble(bac);
             return numero > 0;
         }catch (NumberFormatException e){
             return false; // No se pudo convertir a un número entero válido
@@ -187,7 +187,7 @@ public class Panel extends javax.swing.JFrame {
 
         if (validarhito(hitosText) && validarBAC(bacText)) {
             numero_hitos = Integer.parseInt(hitosText);
-            bac = Integer.parseInt(bacText);
+            bac = Double.parseDouble(bacText);
 
             Prorrateado prorrateado = new Prorrateado( numero_hitos, bac);
             prorrateado.setVisible(true);
@@ -205,7 +205,7 @@ public class Panel extends javax.swing.JFrame {
 
         if (validarhito(hitosText) && validarBAC(bacText)) {
             numero_hitos = Integer.parseInt(hitosText);
-            bac = Integer.parseInt(bacText);
+            bac = Double.parseDouble(bacText);
 
             No_Prorrateado no_prorrateado = new No_Prorrateado(numero_hitos);
             no_prorrateado.setVisible(true);

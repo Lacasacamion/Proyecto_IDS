@@ -232,7 +232,7 @@ public class No_Prorrateado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:;
-        int pv=0;
+        double pv=0;
         if(!metodo_ejecutado){
             //validando entrada de pv
             if(!validarPv(T3.getText().trim())){
@@ -241,11 +241,11 @@ public class No_Prorrateado extends javax.swing.JFrame {
                 return;//Salir del metodo si no se valida
             }
             else{
-                pv=Integer.parseInt(T3.getText());
+                pv=Double.parseDouble(T3.getText());
                 T3.setText("");
                 j++;
             }
-            gestionador.GuardarNoProrrateadoPV_BAC(Table1, pv, numero_hitos);
+            gestionador.guardarNoProrrateadoPV_BAC(Table1, pv, numero_hitos);
             if(j>=numero_hitos){
                 metodo_ejecutado=true;
             }
@@ -265,13 +265,13 @@ public class No_Prorrateado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int ev;
-        int ac;
+        double ev;
+        double ac;
         if(!metodo_ejecutado){
             JOptionPane.showMessageDialog(null, "Ingrese el pv primero");
         }
         else{
-            if(!gestionador.ValidarHitosEvaluar(T6.getText().trim(), numero_hitos)){
+            if(!gestionador.validarHitosEvaluar(T6.getText().trim(), numero_hitos)){
                 JOptionPane.showMessageDialog(null, "El numero de hitos a evaluar no es valido.");
                 T6.setText("");
                 return;
@@ -285,7 +285,7 @@ public class No_Prorrateado extends javax.swing.JFrame {
                 return;
             }
             else{
-                ev=Integer.parseInt(T4.getText());
+                ev=Double.parseDouble(T4.getText());
                 T4.setText("");
             }
             if(!validarPv(T5.getText().trim())){
@@ -294,10 +294,10 @@ public class No_Prorrateado extends javax.swing.JFrame {
                 return;
             }
             else{
-                ac=Integer.parseInt(T5.getText());
+                ac=Double.parseDouble(T5.getText());
                 T5.setText("");
             }
-            gestionador.GuardarNoProrrateadoEV_AC(Table1,numero_hitos, h_evaluar, ev, ac);
+            gestionador.guardarNoProrrateadoEV_AC(Table1,numero_hitos, h_evaluar, ev, ac);
             k++;
             if(k>=h_evaluar){
                 tipo_variacion=true;
@@ -316,9 +316,9 @@ public class No_Prorrateado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
         }
         else{
-            gestionador.VariacionAtipica(h_evaluar, numero_hitos);
+            gestionador.variacionAtipica(h_evaluar, numero_hitos);
             List<Hito> lista_de_hitos = gestionador.getHitos();
-            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos,h_evaluar);            
             tabla_final.setVisible(true);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -329,16 +329,16 @@ public class No_Prorrateado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese los valores necesarios primero");
         }
         else{
-            gestionador.VariacionTipica(h_evaluar, numero_hitos);
+            gestionador.variacionTipica(h_evaluar, numero_hitos);
             List<Hito> lista_de_hitos = gestionador.getHitos();
-            Tabla_final tabla_final=new Tabla_final(lista_de_hitos);            
+            Tabla_final tabla_final=new Tabla_final(lista_de_hitos,h_evaluar);            
             tabla_final.setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public static boolean validarPv(String pv){
         try{
-            int numero = Integer.parseInt(pv);
+            double numero = Double.parseDouble(pv);
             return numero > 0;
         }catch (NumberFormatException e){
             return false; // No se pudo convertir a un número entero válido
